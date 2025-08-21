@@ -31,7 +31,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 ```php
 add_action('admin_enqueue_scripts', function() {
-    $script_path = plugin_dir_url(__FILE__) . '../vendor/your-name/relay-ui/assets/js/relay-ui.js';
+    $script_path = plugin_dir_url(__FILE__) . '../vendor/open-relay/relay-ui/assets/js/relay-ui.js';
     wp_enqueue_script('relay-ui-engine', $script_path, [], '1.0.0', true);
 });
 ```
