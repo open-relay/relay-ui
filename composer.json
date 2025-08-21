@@ -1,0 +1,26 @@
+{
+  "name": "open-relay/relay-ui",
+  "description": "A fluent, object-oriented UI component library for modern WordPress development.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "wordpress",
+    "ui",
+    "components",
+    "php"
+  ],
+  "autoload": {
+    "psr-4": {
+      "Relay\\UI\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Zaid ",
+      "email": "zaid+relay@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.0"
+  }
+}
