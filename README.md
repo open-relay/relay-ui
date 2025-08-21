@@ -16,7 +16,7 @@ Relay UI is a system, philosophy, and toolkit for building UIs with clean, decou
 ## Installation
 
 ```bash
-composer require your-name/relay-ui
+composer require open-relay/relay-ui
 ```
 
 ## Quick Start Guide
