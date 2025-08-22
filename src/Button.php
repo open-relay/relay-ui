@@ -39,7 +39,7 @@ class Button extends Component
         $this->variant = $variant;
         return $this;
     }
-    
+
     /**
      * Sets the size of the button.
      *
@@ -86,26 +86,26 @@ class Button extends Component
     {
         return $this->attribute('data-action', $action);
     }
-    
+
     /**
      * Renders the final button HTML.
      */
     public function render(): void
     {
         $this->class('inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors');
-        
+
         $this->class(match($this->variant) {
             'destructive' => 'bg-error text-white hover:opacity-90',
             'outline'     => 'border border-border bg-transparent hover:bg-surface',
             default       => 'bg-accent text-background hover:bg-accent/90',
         });
-        
+
         $this->class(match($this->size) {
             'sm'      => 'h-9 px-3',
             'lg'      => 'h-11 px-8',
             default   => 'h-10 py-2 px-4',
         });
-        
+
         if ($this->disabled) {
             $this->class('opacity-50 cursor-not-allowed');
             $this->attribute('disabled', 'true');
