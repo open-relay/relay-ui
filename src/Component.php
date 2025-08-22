@@ -28,6 +28,30 @@ abstract class Component
     }
 
     /**
+    * Conditionally adds a CSS class to the component.
+    *
+    * This method allows applying a class only if a given condition is true.
+    * It enables cleaner, fluent chains without breaking flow with separate if statements.
+    *
+    * Usage:
+    *   Button::make('Save Changes')
+    *       ->classIf($is_saving, 'is-loading animate-spin')
+    *       ->render();
+    *
+    * @param bool $condition Whether to apply the class.
+    * @param string $class_string The CSS class string to apply if the condition is true.
+    * @return static Returns the component instance for fluent method chaining.
+    */
+    public function classIf(bool $condition, string $class_string): static
+    {
+        if ($condition) {
+            $this->class($class_string);
+        }
+        return $this;
+    }
+
+
+    /**
      * Sets a key-value HTML attribute for the component.
      *
      * @param string $key The attribute key (e.g., 'id', 'data-action').

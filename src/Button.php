@@ -36,7 +36,12 @@ class Button extends Component
      */
     public function variant(string $variant): self
     {
-        $this->variant = $variant;
+        $allowed_variants = ['default', 'destructive', 'outline'];
+
+        if (in_array($variant, $allowed_variants)) {
+            $this->variant = $variant;
+        }
+
         return $this;
     }
 
@@ -48,7 +53,12 @@ class Button extends Component
      */
     public function size(string $size): self
     {
-        $this->size = $size;
+        $allowed_sizes = ['sm' | 'default' | 'lg'];
+
+        if (in_array($size, $allowed_sizes)) {
+            $this->size = $size;
+        }
+
         return $this;
     }
 
