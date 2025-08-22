@@ -12,11 +12,14 @@
   "autoload": {
     "psr-4": {
       "Relay\\UI\\": "src/"
-    }
+    },
+    "files": [
+      "src/Support/helpers.php"
+    ]
   },
   "authors": [
     {
-      "name": "Zaid ",
+      "name": "Zaid",
       "email": "zaid+relay@gmail.com"
     }
   ],

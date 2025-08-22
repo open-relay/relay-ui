@@ -1,21 +1,12 @@
 /**
  * Relay UI - Client-Side Engine v1.0.0
- * A lightweight, dependency-free engine to hydrate static components.
  */
 class RelayUI {
-    /**
-     * Initializes the engine.
-     */
     constructor() {
         this.actions = new Map();
-        this.init();
+        document.addEventListener('DOMContentLoaded', () => this.init());
     }
 
-    /**
-     * Registers a dynamic action that can be triggered by a component.
-     * @param {string} actionName The name of the action (e.g., 'show-modal').
-     * @param {(element: HTMLElement) => void} callback The function to execute.
-     */
     register(actionName, callback) {
         if (typeof callback !== 'function') {
             console.error(`[RelayUI] Action "${actionName}" requires a valid callback function.`);
@@ -24,13 +15,9 @@ class RelayUI {
         this.actions.set(actionName, callback);
     }
 
-    /**
-     * Initializes the global event listener using event delegation.
-     */
     init() {
-        document.addEventListener('click', (event) => {
+        document.body.addEventListener('click', (event) => {
             const triggerElement = event.target.closest('[data-action]');
-
             if (!triggerElement) return;
 
             const actionName = triggerElement.dataset.action;
@@ -42,5 +29,37 @@ class RelayUI {
     }
 }
 
-// Expose a single, global instance.
 window.Relay = new RelayUI();
+
+window.Relay.register('modal:open', (triggerElement) => {
+    const targetSelector = triggerElement.dataset.target;
+    if (!targetSelector) {
+        console.error('[RelayUI] modal:open trigger requires a `data-target` attribute.');
+        return;
+    }
+    const modalElement = document.querySelector(targetSelector);
+    if (!modalElement) {
+        console.error(`[RelayUI] modal:open could not find target: ${targetSelector}`);
+        return;
+    }
+
+    const data = triggerElement.dataset;
+    const titleEl = modalElement.querySelector('[data-modal-title]');
+    const bodyEl = modalElement.querySelector('[data-modal-body]');
+    const confirmEl = modalElement.querySelector('[data-modal-confirm]');
+
+    if (titleEl && data.title) titleEl.textContent = data.title;
+    if (bodyEl && data.body) bodyEl.innerHTML = data.body;
+    if (confirmEl && data.confirmUrl) confirmEl.href = data.confirmUrl;
+
+    modalElement.classList.remove('hidden');
+    modalElement.classList.add('flex');
+});
+
+window.Relay.register('modal:close', (triggerElement) => {
+    const modalElement = triggerElement.closest('[role="dialog"]');
+    if (modalElement) {
+        modalElement.classList.add('hidden');
+        modalElement.classList.remove('flex');
+    }
+});
